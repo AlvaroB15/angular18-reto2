@@ -12,7 +12,7 @@ export class RegistroService {
 
   constructor(private http: HttpClient) {}
 
-  registrarUsuario(datos: Usuario): Observable<RegistroResponse> {
-    return this.http.post<RegistroResponse>(`${this.apiUrl}/register`, datos);
+  registrarUsuario(datos: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/register`, datos);
   }
 }

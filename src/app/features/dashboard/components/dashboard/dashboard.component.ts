@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   loadData(): void {
     this.dashboardService.getData().subscribe({
       next: (response) => {
-        this.data = response.user;
+        this.data = response;
         this.loading = false;
       },
       error: (error) => {

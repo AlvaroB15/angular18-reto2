@@ -2,11 +2,14 @@ export interface Usuario {
   fullName: string;
   email: string;
   password: string;
-  telefono?: string;
+  phone?: string;
+  status?: number
 }
 
 export interface RegistroResponse {
-  success: boolean;
-  message?: string;
-  user?: Usuario;
+  status: number;
+  timestamp?: string;
+  path?: string;
+  userrorer?: string;
+  requestId?: string
 }

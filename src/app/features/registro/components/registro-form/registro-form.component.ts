@@ -37,7 +37,7 @@ export class RegistroFormComponent implements OnInit {
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d).*$/)
       ]],
-      telefono: ['', [
+      phone: ['', [
         Validators.maxLength(20),
         Validators.pattern(/^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/)
       ]]
@@ -65,7 +65,7 @@ export class RegistroFormComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.loading = false;
-          if (response.success) {
+          if (!response.status) {
             console.log('ENTRE AL IGx');
             this.successMessage = 'Registro exitoso';
             this.registroForm.reset();

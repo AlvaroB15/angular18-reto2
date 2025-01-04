@@ -7,11 +7,16 @@ import { throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
+  
+  const publicUrls = ['/api/register', '/api/login'];
+  const isPublicUrl = publicUrls.some(url => req.url.includes(url));
+  console.log(isPublicUrl);
+
   const token = localStorage.getItem('token');
 
   let authReq = req;
 
-  if (token) {
+  if (!isPublicUrl) {
     authReq = req.clone({
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
