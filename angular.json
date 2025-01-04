@@ -13,7 +13,7 @@
         "build": {
           "builder": "@ngx-env/builder:application",
           "options": {
-            "outputPath": "dist/angular18-reto1/browser",
+            "outputPath": "dist/angular18-reto1/browser/browser",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

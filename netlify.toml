@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "dist/angular18-reto1/browser"
+  publish = "dist/angular18-reto1/browser/browser"
 
 [[redirects]]
   from = "/*"
