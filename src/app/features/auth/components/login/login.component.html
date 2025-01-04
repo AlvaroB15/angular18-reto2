@@ -1,0 +1,56 @@
+<div class="login-container">
+  <h2>Iniciar Sesión</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <div class="form-group">
+      <label for="email">Correo Electrónico</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      />
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors?.['required']">El email es requerido</div>
+        <div *ngIf="f['email'].errors?.['email']">Email inválido</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <div class="password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="togglePasswordVisibility()"
+        >
+          <i>{{ showPassword ? '👁️' : '👁️‍🗨️' }}</i>
+        </button>
+      </div>
+      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="f['password'].errors?.['required']">La contraseña es requerida</div>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ loading ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+    </div>
+  </form>
+
+  <br>
+  <label>Si aun no  cuentas con una cuenta, <a (click)="goToRegister()">Registrate!</a> </label>
+</div>

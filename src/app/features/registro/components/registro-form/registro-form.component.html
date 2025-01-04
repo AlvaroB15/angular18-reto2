@@ -1,0 +1,99 @@
+<div class="registro-container">
+  <h2>Registro de Usuario</h2>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="registro-form">
+    <div class="form-group">
+      <label for="fullName">Nombre Completo *</label>
+      <input
+        type="text"
+        id="fullName"
+        formControlName="fullName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['fullName'].errors }"
+      />
+      <div *ngIf="submitted && f['fullName'].errors" class="invalid-feedback">
+        <div *ngIf="f['fullName'].errors?.['required']">El nombre completo es requerido</div>
+        <div *ngIf="f['fullName'].errors?.['minlength']">El nombre debe tener al menos 3 caracteres</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo Electrónico *</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      />
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors?.['required']">El correo electrónico es requerido</div>
+        <div *ngIf="f['email'].errors?.['email']">Ingrese un correo electrónico válido</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña *</label>
+      <div class="password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+        />
+        <button
+          type="button"
+          class="toggle-password"
+          (click)="togglePasswordVisibility()"
+          [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        >
+          <i class="icon">{{ showPassword ? '👁️' : '👁' }}</i>
+        </button>
+      </div>
+      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="f['password'].errors?.['required']">La contraseña es requerida</div>
+        <div *ngIf="f['password'].errors?.['minlength']">La contraseña debe tener al menos 8 caracteres</div>
+        <div *ngIf="f['password'].errors?.['pattern']">
+          La contraseña debe contener al menos una letra mayúscula y un número
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input
+        type="tel"
+        id="telefono"
+        formControlName="telefono"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['telefono'].errors }"
+      />
+      <div *ngIf="submitted && f['telefono'].errors" class="invalid-feedback">
+        <div *ngIf="f['telefono'].errors?.['pattern']">Ingrese un número de teléfono válido</div>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <label>Los campos con * son obligatorios</label>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ loading ? 'Registrando...' : 'Registrar' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onReset(true)">
+        Limpiar
+      </button>
+    </div>
+
+    <br>
+    <label>Si ya cuentas con una cuenta, <a (click)="goToLogin()">Ingresa</a> </label>
+  </form>
+</div>
